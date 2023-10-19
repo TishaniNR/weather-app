@@ -1,17 +1,45 @@
 import React from 'react'
 import CardTopImage from '../Images/CardTopImage.png';
 
-const CityCard = ({ location, temperature, weatherCondition }) => {
+const CityCard = ({ cityWeatherData }) => {
+  console.log('City Weather Data:', cityWeatherData);
+  const timespan = new Date(cityWeatherData[0].timespan * 1000).toLocaleString();
+ 
   return (
-    <div className="max-w-xs mx-auto p-4 rounded-md shadow-md bg-white">
-      <div className="text-center">
-        <h2 className="text-2xl font-semibold">colombo</h2>
-        <p className="text-lg">24°C</p>
+    <div>
+      <a href="/city">
+      <button>
+      <div className="max-w-sm rounded overflow-hidden shadow-lg m-4  bg-[#363b42] ">
+        <img src={CardTopImage} alt="Sunset in the mountains" />
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2 text-white">Status: {cityWeatherData.weatherDescription}</div>
+            <div className="text-center ">
+            <h2 className="text-2xl font-semibold text-white"> {cityWeatherData.cityName},{cityWeatherData.country}</h2>
+            <p className="text-lg text-white">{timespan}</p>
+            <p className="text-lg text-white">Tempurature: {cityWeatherData.temperature} °C</p> 
+          </div>
+        </div>
       </div>
-      <div className="text-center mt-4">
-        <img src={CardTopImage} alt="Weather Icon" className="w-16 mx-auto" />
-        <p className="text-lg">Sky clear</p>
+      </button>
+      </a>
+
+
+      <a href="/city">
+      <button>
+      <div className="max-w-sm rounded overflow-hidden shadow-lg m-4  bg-[#363b42] ">
+        <img src={CardTopImage} alt="Sunset in the mountains" />
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2 text-white">Status: {cityWeatherData[0].weatherDescription}</div>
+            <div className="text-center ">
+            <h2 className="text-2xl font-semibold text-white"> {cityWeatherData[0].cityName},{cityWeatherData[0].country}</h2>
+            <p className="text-lg text-white">{timespan}</p>
+            <p className="text-lg text-white">Tempurature: {cityWeatherData[0].temperature} °C</p> 
+          </div>
+        </div>
       </div>
+      </button>
+      </a>
+                  
     </div>
   )
 }
