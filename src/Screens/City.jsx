@@ -1,4 +1,3 @@
-//import CityComponent from '../Components/CityCard';
 import CityComponent from '../Components/CityPageCom';
 
 import Header from "../Components/Header";

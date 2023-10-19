@@ -2,15 +2,18 @@ import React from 'react';
 import background from '../Images/Background.png';
 import CityCard from './CityCard';
 
-const HomeCom = ({ weatherData, cityWeatherData }) => {
+const HomeCom = ({cityWeatherData }) => {
   
-  console.log('Additional Data:', cityWeatherData);
+  console.log('City Weather Data:', cityWeatherData);
  
   return (
-    <div className="h-screen flex justify-center items-center" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      <div className=" flex justify-center items-center m-4">
-      <CityCard cityWeatherData={cityWeatherData}/>
+    <div className="h-full w-full flex justify-center items-center" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div className=" grid lg:grid-cols-2 sm:grid-cols-1 gap-4 justify-center items-center xs:mx-8 my-auto">
+      {cityWeatherData.map((cityWeather, index) => (
+          <CityCard key={index} cityWeatherData={cityWeather} />
+        ))}
       </div>
+
     </div>
   );
 };

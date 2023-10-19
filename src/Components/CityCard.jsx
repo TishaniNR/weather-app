@@ -1,45 +1,55 @@
 import React from 'react'
-import CardTopImage from '../Images/CardTopImage.png';
+import { Link } from "react-router-dom";
 
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 const CityCard = ({ cityWeatherData }) => {
-  console.log('City Weather Data:', cityWeatherData);
-  const timespan = new Date(cityWeatherData[0].timespan * 1000).toLocaleString();
+  //console.log('City Weather Data:', cityWeatherData);
+  const timespan = new Date((cityWeatherData.timespan + 0) * 1000).toLocaleString();
+  const randomBackgroundColor = getRandomColor();
  
   return (
     <div>
-      <a href="/city">
-      <button>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg m-4  bg-[#363b42] ">
-        <img src={CardTopImage} alt="Sunset in the mountains" />
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2 text-white">Status: {cityWeatherData.weatherDescription}</div>
-            <div className="text-center ">
-            <h2 className="text-2xl font-semibold text-white"> {cityWeatherData.cityName},{cityWeatherData.country}</h2>
+      <Link to={`/city/${cityWeatherData.cityName}`}>
+      <div className="rounded shadow-lg justify-center items-center text-white text-center" style={{ backgroundColor: randomBackgroundColor }}>   
+            <div className="text-center grid grid-cols-2 ">
+            <div className="col-span-1">
+            <h2 className="text-2xl font-semibold text-white p-4"> {cityWeatherData.cityName},{cityWeatherData.country}</h2>
             <p className="text-lg text-white">{timespan}</p>
-            <p className="text-lg text-white">Tempurature: {cityWeatherData.temperature} °C</p> 
+            </div>
+            <p className="p-4 text-6xl text-white">{cityWeatherData.temperature} °C</p>
+            
+            <div className="font-bold text-xl mb-2 text-white"> {cityWeatherData.weatherDescription}</div>
+        </div>
+        </div>
+
+        <div className=" rounded shadow-lg bg-[#2b3139] justify-center items-center text-white text-center mb-4">
+        <div className="grid grid-cols-3 gap-4">
+          <div className="m-8 text-center">
+            <div className="text-lg font-semibold text-white">Pressure: 1018hPa</div>
+            <div className="text-lg font-semibold text-white">Humidity: 78%</div>
+            <div className="text-lg font-semibold text-white">Visibility: 8.0km</div>
           </div>
+
+          <div className="m-8 text-center">
+            <div className="text-lg font-semibold text-white">4.0m/s Degree</div>
+
+          </div>
+
+          <div className="m-8 text-center">
+            <div className="text-lg font-semibold text-white">Sunrise:</div>
+            <div className="text-lg font-semibold text-white">Sunset:</div>
+          </div>
+
         </div>
       </div>
-      </button>
-      </a>
-
-
-      <a href="/city">
-      <button>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg m-4  bg-[#363b42] ">
-        <img src={CardTopImage} alt="Sunset in the mountains" />
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2 text-white">Status: {cityWeatherData[0].weatherDescription}</div>
-            <div className="text-center ">
-            <h2 className="text-2xl font-semibold text-white"> {cityWeatherData[0].cityName},{cityWeatherData[0].country}</h2>
-            <p className="text-lg text-white">{timespan}</p>
-            <p className="text-lg text-white">Tempurature: {cityWeatherData[0].temperature} °C</p> 
-          </div>
-        </div>
-      </div>
-      </button>
-      </a>
-                  
+      </Link>            
     </div>
   )
 }
