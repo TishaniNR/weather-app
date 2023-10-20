@@ -51,8 +51,8 @@ const CityCard = ({ cityWeatherData }) => {
   return (
     <div>
       <Link to={`/city/${cityWeatherData.cityName}`} state={{ cityWeatherData: cityWeatherData }}>
-        <div className="rounded shadow-lg justify-center items-center text-white text-center" style={{ backgroundColor: randomBackgroundColor }}>
-          <div className="text-center grid grid-cols-2">
+        <div className="rounded shadow-lg justify-center items-center text-white text-center mx-8" style={{ backgroundColor: randomBackgroundColor }}>
+          <div className="text-center grid grid-cols-2 mx-4">
             <div className="col-span-1">
               <h2 className="text-2xl font-semibold text-white p-4">
                 {cityWeatherData.cityName}, {cityWeatherData.country}
@@ -71,7 +71,7 @@ const CityCard = ({ cityWeatherData }) => {
           </div>
         </div>
 
-        <div className="rounded shadow-lg bg-[#2b3139] justify-center items-center text-white text-center mb-4">
+        <div className="rounded shadow-lg bg-[#2b3139] justify-center items-center text-white text-center mb-4 mx-8">
           <div className="grid grid-cols-3 gap-4">
             <div className="m-8 text-center">
               <div className="text-lg font-semibold text-white">Pressure: 1018hPa</div>

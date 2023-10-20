@@ -25,7 +25,7 @@ const CityPageCom = () => {
                 {cityWeatherData.cityName}, {cityWeatherData.country}
               </h2>
               <h2 className="text-lg text-white">{timespan}</h2>
-              <div className="grid grid-cols-2 gap-4 ">
+              <div className="grid md:grid-cols-2 xs:grid-cols-1 gap-4 ">
                 <div className="font-bold text-xl text-white mb-2">
                   {cityWeatherData.weatherDescription}
                 </div>
