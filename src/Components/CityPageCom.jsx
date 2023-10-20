@@ -53,8 +53,8 @@ const CityPageCom = () => {
                   </div>
                 </div>
                 <div className="m-8 text-center">
-                  <div className="text-lg font-semibold text-white">Sunrise:</div>
-                  <div className="text-lg font-semibold text-white">Sunset:</div>
+                  <div className="text-lg font-semibold text-white">Sunrise: 6.28am</div>
+                  <div className="text-lg font-semibold text-white">Sunset: 6.04pm</div>
                 </div>
               </div>
             </div>

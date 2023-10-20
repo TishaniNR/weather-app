@@ -16,8 +16,8 @@ function mapWeatherIcon(iconCode) {
       return <FontAwesomeIcon icon={faMoon} className="fa-3x p-4" />;
     case '01d':
       return <FontAwesomeIcon icon={faSun} className="fa-3x p-4" />;
-      case '04n':
-        return <FontAwesomeIcon icon={faCloudSun} className="fa-3x p-4" />;
+    case '04n':
+      return <FontAwesomeIcon icon={faCloudSun} className="fa-3x p-4" />;
     case '03n':
       return <FontAwesomeIcon icon={faCloudSun} className="fa-3x p-4" />;
     case '04d':
@@ -26,7 +26,7 @@ function mapWeatherIcon(iconCode) {
       return <FontAwesomeIcon icon={faCloudShowersHeavy} className="fa-3x p-4" />;
       
     default:
-      return null;
+      return <FontAwesomeIcon icon={faSun} className="fa-3x p-4" />;
   }
 }
 
@@ -86,8 +86,8 @@ const CityCard = ({ cityWeatherData }) => {
             </div>
 
             <div className="m-8 text-center">
-              <div className="text-lg font-semibold text-white">Sunrise:</div>
-              <div className="text-lg font-semibold text-white">Sunset:</div>
+              <div className="text-lg font-semibold text-white">Sunrise: 6.28am</div>
+              <div className="text-lg font-semibold text-white">Sunset: 6.04pm</div>
             </div>
           </div>
         </div>
