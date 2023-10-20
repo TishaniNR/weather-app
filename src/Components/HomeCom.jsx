@@ -4,7 +4,7 @@ import CityCard from './CityCard';
 
 const HomeCom = ({cityWeatherData }) => {
   
-  console.log('City Weather Data:', cityWeatherData);
+  //console.log('City Weather Data home Com:', cityWeatherData);
  
   return (
     <div className="h-full w-full flex justify-center items-center" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
@@ -13,7 +13,6 @@ const HomeCom = ({cityWeatherData }) => {
           <CityCard key={index} cityWeatherData={cityWeather} />
         ))}
       </div>
-
     </div>
   );
 };

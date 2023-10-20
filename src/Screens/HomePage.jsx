@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import HomeComponent from '../Components/HomeCom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
-
 const HomePage = () => {
   const [cityCodes, setCityCodes] = useState([]);
   const [dataToSend, setDataToSend] = useState([]);
@@ -44,6 +43,7 @@ const HomePage = () => {
         weatherDescription: cityWeather.weather[0].description,
         temperature: cityWeather.main.temp,
       }));
+      //console.log('Modified Data to Send:', modifiedDataToSend); // Log the modified dataToSend
 
       // Set the modifiedDataToSend state
       setDataToSend(modifiedDataToSend);
@@ -54,6 +54,7 @@ const HomePage = () => {
         console.error('An error occurred while fetching data', error);
       }
     }
+    //console.log("data to send",dataToSend );
 
     fetchCities();
   }, []);

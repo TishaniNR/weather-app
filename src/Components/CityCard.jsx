@@ -16,7 +16,7 @@ const CityCard = ({ cityWeatherData }) => {
  
   return (
     <div>
-      <Link to={`/city/${cityWeatherData.cityName}`}>
+      <Link to={`/city/${cityWeatherData.cityName}`} state={{ cityWeatherData: cityWeatherData }}>
       <div className="rounded shadow-lg justify-center items-center text-white text-center" style={{ backgroundColor: randomBackgroundColor }}>   
             <div className="text-center grid grid-cols-2 ">
             <div className="col-span-1">
