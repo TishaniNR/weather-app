@@ -16,7 +16,9 @@ function mapWeatherIcon(iconCode) {
       return <FontAwesomeIcon icon={faMoon} className="fa-3x p-4" />;
     case '01d':
       return <FontAwesomeIcon icon={faSun} className="fa-3x p-4" />;
-    case '04n':
+      case '04n':
+        return <FontAwesomeIcon icon={faCloudSun} className="fa-3x p-4" />;
+    case '03n':
       return <FontAwesomeIcon icon={faCloudSun} className="fa-3x p-4" />;
     case '04d':
       return <FontAwesomeIcon icon={faCloudMoon} className="fa-3x p-4" />;
