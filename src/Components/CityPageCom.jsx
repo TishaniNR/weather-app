@@ -7,16 +7,16 @@ import background from "../Images/Background.png";
 const CityPageCom = () => {
   const location = useLocation();
   const { cityWeatherData } = location.state || {};
-  console.log("City Weather Data in the city com page:", cityWeatherData);
+  //console.log("City Weather Data in the city com page:", cityWeatherData);
   const timespan = new Date((cityWeatherData.timespan + 0) * 1000).toLocaleString();
 
   return (
     <div className="h-screen flex flex-col">
     <div className="h-full w-full flex justify-center items-center" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="p-4 flex-grow flex items-center justify-center">
-          <div className="w-1/2  rounded shadow-lg bg-[#5395e1] p-4">
+          <div className="w-1/2  rounded shadow-lg bg-[#5395e1] p-4 absolute  top-48">
             <a href="/" className="absolute top-2 left-2">
-              <div className="text-lg cursor-pointer bg-white p-1 rounded-full">
+              <div className="text-lg text-white cursor-pointer p-1 rounded-full">
                 <FontAwesomeIcon icon={faArrowLeft} />
               </div>
             </a>
