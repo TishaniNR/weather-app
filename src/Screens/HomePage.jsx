@@ -2,82 +2,36 @@ import React, { useState, useEffect } from 'react';
 import HomeComponent from '../Components/HomeCom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
-import { LRUCache } from 'lru-cache'; // Import the caching library
-
-const cache = new LRUCache({ max: 100, maxAge: 1000 * 60 * 5 }); // Initialize the cache
+import { fetchWeatherData } from '../APIHelper'; // Import the API service
 
 const HomePage = () => {
   const [cityCodes, setCityCodes] = useState([]);
   const [dataToSend, setDataToSend] = useState([]);
 
-  //console.log('City Codes:', cityCodes); // Log the city codes 
   useEffect(() => {
-    async function fetchCities() {
+    async function fetchData() {
       try {
-        // Check if data is in the cache
-        const cachedData = cache.get('weatherData');
-
-        if (cachedData) {
-          // Use cached data
-          setDataToSend(cachedData);
-          console.log('Data retrieved from cache');
-        } else {
-          const cities = require('../cities.json');
-          //console.log('Cities:', cities); // Log the cities data 
-
-          // Extract 'CityCode' values and update the state
-          const extractedCityCodes = cities.List.map(city => city.CityCode);
-          setCityCodes(extractedCityCodes);
-
-          // Build the API request URL to fetch weather data for the group of cities
-          const apiEndpoint = 'http://api.openweathermap.org/data/2.5/group';
-          const apiParams = {
-            id: extractedCityCodes.join(','),
-            units: 'metric', // Adjust units as needed 
-            appid: '53a0b3c59488e3b72d499e23a47c0887', // OpenWeatherMap API key
-          };
-          const apiUrl = `${apiEndpoint}?${new URLSearchParams(apiParams)}`;
-          //console.log('API URL:', apiUrl); 
-
-          // Fetch weather data for the group of cities
-          const weatherResponse = await fetch(apiUrl);
-          if (weatherResponse.ok) {
-            const weatherData = await weatherResponse.json();
-            //console.log('Weather Data:', weatherData); 
-
-            // Create an array to store the modified dataToSend for each city
-            const modifiedDataToSend = weatherData.list.map(cityWeather => ({
-              cityName: cities.List[weatherData.list.indexOf(cityWeather)].CityName,
-              country: cityWeather.sys.country,
-              cityCode: cityWeather.id,
-              timespan: cityWeather.dt,
-              weatherDescription: cityWeather.weather[0].description,
-              temperature: cityWeather.main.temp,
-              icon: cityWeather.weather[0].icon,
-            }));
-            //console.log('Modified Data to Send:', modifiedDataToSend); // Log the modified dataToSend
-
-            // Set the modifiedDataToSend state
-            setDataToSend(modifiedDataToSend);
-            // Cache the data for 5 minutes
-            cache.set('weatherData', modifiedDataToSend, 1000 * 60 * 5);
-          } else {
-            console.error('Failed to fetch weather data');
-          }
+        const weatherData = await fetchWeatherData();
+        if (weatherData) {
+          const cityCodes = weatherData.list.map(cityWeather => cityWeather.id);
+          setCityCodes(cityCodes);
+          setDataToSend(weatherData.list);
         }
       } catch (error) {
         console.error('An error occurred while fetching data', error);
       }
     }
-    //console.log("data to send",dataToSend );
 
-    fetchCities();
+    fetchData();
   }, []);
+
+  //console.log('City Codes:', cityCodes); // Log the city codes  
+  //console.log('Data to Send:', dataToSend); // Log the data to send
 
   return (
     <div>
       <Header />
-      <HomeComponent cityCodes={cityCodes} cityWeatherData={dataToSend}  />
+      <HomeComponent cityCodes={cityCodes} cityWeatherData={dataToSend} />
       <Footer />
     </div>
   );

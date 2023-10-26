@@ -8,25 +8,26 @@ import {  faMoon, // Icon for '01n'
           faCloudShowersHeavy, // Icon for '10d'
           
 } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 
 // Function to map the icon code to a corresponding weather icon
 function mapWeatherIcon(iconCode) {
   switch (iconCode) {
     case '01n':
-      return <FontAwesomeIcon icon={faMoon} className="fa-3x p-4" />;
+      return <FontAwesomeIcon icon={faMoon} className="fa-1x p-2" />;
     case '01d':
-      return <FontAwesomeIcon icon={faSun} className="fa-3x p-4" />;
+      return <FontAwesomeIcon icon={faSun} className="fa-1x p-2"/>;
     case '04n':
-      return <FontAwesomeIcon icon={faCloudSun} className="fa-3x p-4" />;
+      return <FontAwesomeIcon icon={faCloudSun} className="fa-1x p-2"/>;
     case '03n':
-      return <FontAwesomeIcon icon={faCloudSun} className="fa-3x p-4" />;
+      return <FontAwesomeIcon icon={faCloudSun} className="fa-1x p-2" />;
     case '04d':
-      return <FontAwesomeIcon icon={faCloudMoon} className="fa-3x p-4" />;
+      return <FontAwesomeIcon icon={faCloudMoon} className="fa-1x p-2" />;
     case '10d':
-      return <FontAwesomeIcon icon={faCloudShowersHeavy} className="fa-3x p-4" />;
+      return <FontAwesomeIcon icon={faCloudShowersHeavy} className="fa-1x p-2" />;
       
     default:
-      return <FontAwesomeIcon icon={faSun} className="fa-3x p-4" />;
+      return <FontAwesomeIcon icon={faSun} className="fa-3x p-2" />;
   }
 }
 
@@ -44,50 +45,58 @@ const CityCard = ({ cityWeatherData }) => {
   //console.log('City Weather Data:', cityWeatherData);
 
   // Convert the timespan to a readable date format
-  const timespan = new Date((cityWeatherData.timespan + 0) * 1000).toLocaleString();
+  const formattedTimespan = moment.utc().add(cityWeatherData.sys.timezone, "seconds").format("hh:mm a, MMM DD");
+
+
+  const sunrise = new Date(cityWeatherData.sys.sunrise * 1000);
+  const sunriseTime = sunrise.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  const sunset = new Date(cityWeatherData.sys.sunset * 1000);
+  const sunsetTime = sunset.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
   // Generate a random background color
   const randomBackgroundColor = getRandomColor();
   // Map the weather icon
-  const icon = mapWeatherIcon(cityWeatherData.icon); 
+  const icon = mapWeatherIcon(cityWeatherData.icon);
 
   return (
     <div>
       <Link to={`/city/${cityWeatherData.cityName}`} state={{ cityWeatherData: cityWeatherData }}>
-        <div className="rounded shadow-lg justify-center items-center text-white text-center mx-8" style={{ backgroundColor: randomBackgroundColor }}>
-          <div className="text-center grid grid-cols-2 mx-4">
+        <div className="rounded shadow-lg justify-center items-center  text-white text-center mx-8 p-2 max-w-lg md:h-56" style={{ backgroundColor: randomBackgroundColor, }}>
+          <div className="text-center grid md:grid-cols-2 sm:grid-cols-1 mx-4">
             <div className="col-span-1">
               <h2 className="text-2xl font-semibold text-white p-4">
-                {cityWeatherData.cityName}, {cityWeatherData.country}
+                {cityWeatherData.name}, {cityWeatherData.sys.country}
               </h2>
-              <p className="text-lg text-white">{timespan}</p>
+              <p className="text-lg text-white">{formattedTimespan}</p>
             </div>
-              <p className="p-4 text-6xl text-white">{cityWeatherData.temperature} °C</p>
+              <p className="p-4 text-4xl text-white">{cityWeatherData.main.temp} °C</p>
               <div>
-                <div className="font-bold text-xl mb-2 text-white">{cityWeatherData.weatherDescription}</div>
+                <div className="font-bold text-xl mb-2 text-white">{cityWeatherData.weather[0].description}</div>
                 <div className="font-bold text-xl mb-2 text-white">{icon}</div>
               </div>
               <div>
-                <p className=" text-6lg text-white">Temp Min: 18.42°C</p>
-                <p className=" text-6lg text-white">Temp Min: 34.75°C</p>
+                <p className=" text-6lg text-white">Temp Min: {cityWeatherData.main.temp_min}°C</p>
+                <p className=" text-6lg text-white">Temp Max: {cityWeatherData.main.temp_max}°C</p>
               </div>
           </div>
         </div>
 
-        <div className="rounded shadow-lg bg-[#2b3139] justify-center items-center text-white text-center mb-4 mx-8">
-          <div className="grid grid-cols-3 gap-4">
-            <div className="m-8 text-center">
-              <div className="text-lg font-semibold text-white">Pressure: 1018hPa</div>
-              <div className="text-lg font-semibold text-white">Humidity: 78%</div>
-              <div className="text-lg font-semibold text-white">Visibility: 8.0km</div>
+        <div className="rounded shadow-lg bg-[#2b3139] justify-center items-center text-white text-center mb-4 mx-8 p-2 max-w-lg md:h-36 sm:h-96">
+          <div className="grid md:grid-cols-3 sm:grid-cols-1">
+            <div className="m-2 text-center">
+              <div className="text-lg font-semibold text-white">Pressure: {cityWeatherData.main.pressure}hPa</div>
+              <div className="text-lg font-semibold text-white">Humidity: {cityWeatherData.main.humidity}%</div>
+              <div className="text-lg font-semibold text-white">Visibility: {cityWeatherData.visibility}km</div>
             </div>
 
-            <div className="m-8 text-center">
-              <div className="text-lg font-semibold text-white">4.0m/s Degree</div>
+            <div className="m-2 text-center">
+              <div className="text-lg font-semibold text-white">{cityWeatherData.wind.speed} m/s  {cityWeatherData.wind.deg} Degree</div>
             </div>
 
-            <div className="m-8 text-center">
-              <div className="text-lg font-semibold text-white">Sunrise: 6.28am</div>
-              <div className="text-lg font-semibold text-white">Sunset: 6.04pm</div>
+            <div className="m-2 text-center">
+              <div className="text-lg font-semibold text-white">{sunriseTime}</div>
+              <div className="text-lg font-semibold text-white">{sunsetTime}</div>
             </div>
           </div>
         </div>

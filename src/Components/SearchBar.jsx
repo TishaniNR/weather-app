@@ -13,7 +13,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center p-2 ">
+    <div className="flex flex-col md:flex-row justify-center items-center p-2 m-8">
       <input
         type="text"
         placeholder="Enter a city"

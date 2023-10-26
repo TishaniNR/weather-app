@@ -4,6 +4,7 @@ import React from 'react';
 
 import {HomePage,CityPage} from "./Routes.js";
 function App() {
+  //console.log(process.env.REACT_APP_OPENWEATHERMAP_API_KEY);
   return (
     <BrowserRouter>
       <Routes>
