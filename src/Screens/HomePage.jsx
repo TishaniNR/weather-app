@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import HomeComponent from '../Components/HomeCom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
-import { fetchWeatherData } from '../APIHelper'; // Import the API service
+import { fetchWeatherData } from '../APIHelper'; 
 
 const HomePage = () => {
   const [cityCodes, setCityCodes] = useState([]);

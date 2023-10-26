@@ -1,5 +1,5 @@
 import React from 'react';
-import background from '../images/Background.png';
+import background from '../Images/Background.png';
 import CityCard from './CityCard';
 import SearchBar from '../Components/SearchBar';
 

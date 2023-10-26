@@ -2,7 +2,8 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import background from "../images/Background.png";
+import background from "../Images/Background.png";
+import moment from 'moment';
 
 const CityPageCom = () => {
   const location = useLocation();
@@ -10,7 +11,7 @@ const CityPageCom = () => {
   //console.log("City Weather Data in the city com page:", cityWeatherData);
   
     // Convert the timespan to a readable date format
-    const updatetime = new Date((cityWeatherData.dt) * 1000).toLocaleString();
+    const formattedTimespan = moment.utc().add(cityWeatherData.sys.timezone, "seconds").format("hh:mm a, MMM DD");
   
     const sunrise = new Date(cityWeatherData.sys.sunrise * 1000);
     const sunriseTime = sunrise.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -33,7 +34,7 @@ const CityPageCom = () => {
               <h2 className="text-2xl font-semibold text-white">
                 {cityWeatherData.name}, {cityWeatherData.sys.country}
               </h2>
-              <h2 className="text-lg text-white">{updatetime}</h2>
+              <h2 className="text-lg text-white">{formattedTimespan}</h2>
               <div className="grid md:grid-cols-2 xs:grid-cols-1 gap-4 ">
                 <div className="font-bold text-xl text-white mb-2">
                   {cityWeatherData.weather[0].description}
