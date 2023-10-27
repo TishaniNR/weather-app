@@ -79,6 +79,7 @@ Before running this project, you'll need to set up your environment variables. T
 2. Add the following variables to your `.env` file:
 
 Replace `your_openweathermap_api_key` with your actual OpenWeatherMap API key.
+REACT_APP_OPENWEATHERMAP_API_KEY='YOUR_API_KEY'
 
 3. Save the `.env` file.
 
