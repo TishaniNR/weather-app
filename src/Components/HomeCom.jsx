@@ -4,7 +4,7 @@ import CityCard from './CityCard';
 import SearchBar from '../Components/SearchBar';
 
 const HomeCom = ({ cityWeatherData }) => {
-  //console.log('City Weather Data home Com:', cityWeatherData);
+
 
   return (
     <div

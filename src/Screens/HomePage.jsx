@@ -24,10 +24,6 @@ const HomePage = () => {
 
     fetchData();
   }, []);
-
-  //console.log('City Codes:', cityCodes); // Log the city codes  
-  //console.log('Data to Send:', dataToSend); // Log the data to send
-
   return (
     <div>
       <Header />

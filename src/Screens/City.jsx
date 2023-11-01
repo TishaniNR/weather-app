@@ -6,7 +6,7 @@ import Footer from "../Components/Footer";
 const City = () => {
   return (
     <div>
-      <Header />
+      <Header />   
       <CityComponent />
       <Footer />
     </div>

@@ -4,7 +4,6 @@ export async function fetchWeatherData() {
   try {
     // Check if data is in the cache
     const cachedData = getFromCache('weatherData');
-    console.log('Cached Data:', cachedData);
 
     if (cachedData) {
       console.log('Data retrieved from cache');
@@ -12,7 +11,6 @@ export async function fetchWeatherData() {
     } else {
       const cities = require('./cities.json');
       const extractedCityCodes = cities.List.map(city => city.CityCode);
-      //console.log('City Codes:', extractedCityCodes);
       const apiEndpoint = API_BASE_URL;
       const apiParams = {
         id: extractedCityCodes.join(','),
@@ -20,24 +18,12 @@ export async function fetchWeatherData() {
         appid: OPENWEATHERMAP_API_KEY,
       };
       const apiUrl = `${apiEndpoint}?${new URLSearchParams(apiParams)}`;
-      //console.log('API URL:', apiUrl); 
 
       const weatherResponse = await fetch(apiUrl);
       if (weatherResponse.ok) {
         const weatherData = await weatherResponse.json();
-        //console.log('Weather Data:', weatherData);
 
-        // const modifiedDataToSend = weatherData.list.map(cityWeather => ({
-        //   cityName: cities.List[weatherData.list.indexOf(cityWeather)].CityName,
-        //   country: cityWeather.sys.country,
-        //   cityCode: cityWeather.id,
-        //   timespan: cityWeather.dt,
-        //   weatherDescription: cityWeather.weather[0].description,
-        //   temperature: cityWeather.main.temp,
-        //   icon: cityWeather.weather[0].icon,
-        // }));
-
-        // Cache the data for 5 minutes
+        // Cache the data
         setInCache('weatherData', weatherData);
         console.log('Data retrieved from API');
 
