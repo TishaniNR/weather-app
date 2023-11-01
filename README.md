@@ -68,3 +68,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## Setting Up Environment Variables
+
+Before running this project, you'll need to set up your environment variables. These variables typically include sensitive data like API keys, which should not be committed to the repository. Follow these steps to set up your environment:
+
+1. Create a `.env` file in the root directory of this project.
+
+2. Add the following variables to your `.env` file:
+
+Replace `your_openweathermap_api_key` with your actual OpenWeatherMap API key.
+REACT_APP_OPENWEATHERMAP_API_KEY='YOUR_API_KEY'
+
+3. Save the `.env` file.
+
+By following these steps, you'll set up the necessary environment variables required for this project.
+
+
