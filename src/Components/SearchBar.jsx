@@ -23,7 +23,7 @@ const SearchBar = () => {
       />
       <button
         onClick={handleAddCity}
-        className="mt-2 md:mt-0 md:ml-[-10px] px-4 py-2 rounded-lg text-white bg-[#740ae6] hover:bg-[#9c91e7] focus:outline-none"
+        className="mt-2 md:mt-0 md:ml-[-10px] px-4 py-2 rounded-lg text-white bg-[#213a73] hover:bg-[#8394bb] focus:outline-none"
       >
         Add City
       </button>
